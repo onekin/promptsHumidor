@@ -27,12 +27,7 @@ For the given research paper, do not include artifactClass not created by the au
 Avoid proper nouns, focusing on broad functional descriptions. For the entity, focus on describing how the artefact achieves its function rather than what it aims to achieve. Look for descriptors that specify how the artefact performs or enhances its function 
 ‘artifactClass’ entity name conveys core functional principles rather than specific tool or implementation. Focus on the fundamental concepts and behavioral mechanisms embedded in the artifact—how it performs or enhances its function—rather than what specific type of tool it is (e.g., “user sentiment analysis framework” instead of “user feedback collection app”). Examples: Rather than describing a “data visualization tool,” describe it as a data interpretation model that clarifies relationships and patterns within complex datasets. 
 
- 
-
- 
-
 ENSURE THIS IMPORTANT GUIDELINES FOR ENTITIES:  
-
 [how1] A document might have zero or various entities of a type. 
 [how2] For entities that represent verbs, check if there’s an inclusion relationship where performing one activity includes performing another (e.g., “research” includes “read”). If this is the case, focus only on the included action (“read”) and ignore the broader one (“research”). 
 [how3] For those entities of the same type that denote subjects, note if there is a hyponym relationship (e.g., "sparrow" as a specific type of "bird"). If so, consider only the most specific. Hypernyms are a broader category found in the text for the name of the entity. 
@@ -47,23 +42,16 @@ ENSURE THIS IMPORTANT GUIDELINES FOR ENTITIES:
 relationship_types and definitions. Please note that all relationships are strictly directional from the domain to the range: 
 
 arisesAt (problem → context): A specific context reveals or gives rise to a problem, situating it within environmental or situational factors. Source: problem; Target: context 
-
 concerns (problem → stakeholder): Indicates that a problem is relevant or impactful for a stakeholder who has a vested interest in addressing or resolving it. Source: problem; Target: stakeholder 
-
 causedBy (problem → problem): Describes a causal relationship between two problems, where one (P1) results from another (P2). Source: problem; Target: problem. Please is important to find this relationships 
-
 informs (problem → goal): Indicates that addressing a problem provides a basis for defining stakeholder goals. Domain: problem; Target: goal 
-
 achievedBy (goal → requirement): Specifies the goal is achieved by the requirement. Source: goal, Target: requirement 
-
 addressedBy (problem → artifactClass): Shows that an artifactClass has been developed specifically to solve or mitigate the identified Problem. Source: problem, Target: artifactClass 
-
 meetBy (requirement → artifactClass): Specifies the requirements met by the artifactClass. Source: requirement, Target: artifactClass 
 
 STEPS: 
 
 1. Identify all entities. Identify all entities in the text according to the predefined entity types. For each identified entity, extract the following information: 
-
 - entity_name: Name of the entity 
 - entity_type: One of the following types: [\{entity_types}] 
 - entity_description: Comprehensive description of the entity's attributes and activities. If it is an artifactClass entity the description should stand for an abstract category 
@@ -71,7 +59,6 @@ STEPS:
 - entity_excerpt: Text excerpt from the RESEARCH_PAPER where the entity is introduced 
 
  2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other. For each pair of related entities, extract the following information: 
-
 - source_entity: name of the source entity, as identified in step 1 
 - target_entity: name of the target entity, as identified in step 1 
 - relationship_type: One of the following types: [\{relationship_types}] 
@@ -80,7 +67,6 @@ STEPS:
 - relationship_excerpt: Text excerpt from the RESEARCH_PAPER where the relationship is introduced 
 
 3. Based on the information identified, fill in the template (see next) according to the following guidelines: 
-
 -If an entity type has no instances, then return  "UNKNOWN" for this entity type 
 -if the entity type is  ‘problem’, and there is only one instance of problem, then provide this instance.  
 -if the entity type is  ‘problem’, and there are several instances of problem, then, select the instance that better describes the problem that the paper targets. Ignore the rest of the instances. 
@@ -102,8 +88,7 @@ Generate a consolidated JSON structure containing all identified entities, relat
       ] 
     }, 
     // repeat structure for each unique entity 
- ], 
-
+ ],
  "relationships": [ 
    \{ 
       "source_entity": source_entity, 
