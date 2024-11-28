@@ -1,1 +1,126 @@
+RESEARCH_PAPER= {RESEARCH_PAPER} 
 
+-CONTEXT: 
+Design Science Research (DSR) is a research approach focused on the creation and evaluation of ARTIFACTS intended to solve complex PROBLEMS within a specific CONTEXT. In DSR, the development of an ARTIFACT is guided by identifying REQUIREMENTS that emerge from the GOALS of various STAKEHOLDERS. 
+
+-GOAL: 
+Given the above RESEARCH_PAPER that is potentially relevant to this activity and a list of both entity_types and relationship_types, identify all the entities needed from the text, limited to those that play the role according to the predefined entity types and all relationships among the identified entities according to the predefined relationship types. 
+
+entity_types and definitions: 
+
+problem: This is the challenge or issue that the artifact aims to resolve, often described with terms like "lack," "inadequacy," or "insufficiency." When identifying "problem" entities that are addressed in the paper,  focus on objectives or goals that are unmet.  Consider that later you will be asked to find “causedBy” relationships between different problems the research paper addresses (Problem → Problem). Important: Describe the entity_name for problems in terms of a deficiency or shortfall in meeting stakeholders’ goals, using negative phrasing like "lack of...," "inadequate..., “excessive” " or "insufficient...".  
+
+context: The environment or situational factors where the artefact will be used, such as technical, social, organisational, or economic conditions that define the problem space. Descriptions may include "setting," "scope," "conditions," or "operational framework." When identifying ‘context’ entities, the entity_name should reflect the specific context of the research paper. For example, rather than using a broad term like “web technologies” for a paper focused on “React-based single-page applications”, use “React single-page applications” to capture the specific context. You can capture later the ‘web technologies’ as entity_hypernym. 
+
+stakeholder: Any individual, group, or entity invested in or affected by the artefact’s development or performance, including end-users, developers, clients, or regulatory bodies. For this entity_type it is important to find the more specific subset of stakeholders addressed by the research paper, for example, if the paper focuses on Oracle database managers, return Oracle database manager and no database managers. 
+
+goal: The outcomes stakeholders seek to achieve and capture the primary aspiration or improvement that stakeholders seek from using the artefact.  This aspiration is typically high-level and reflects what stakeholders (such as developers or end-users) fundamentally aim to achieve to address the core problem, rather than intermediate operational benefits. Goals reflect aspirations for improvements or efficiencies for stakeholders. IMPORTANT:  
+Focus on Intentions: Look for phrases that express a stakeholder’s intent or desire for a broad outcome (e.g., "improve comprehension," "increase understanding," "enhance decision-making"). 
+Avoid Operational Outcomes: Avoid interpreting operational terms like "reduce time," "increase accuracy," or "streamline processes" as goals unless they are directly stated as the stakeholder’s main objective. Instead, consider these as requirements or subgoals that contribute to achieving the primary goal. 
+When a goal is denoted as a conjunction, carefully examine whether it represents a composite idea or two distinct notions. If it is the latter, split the entity into two goals. For example, “improve task efficiency and reduce task complexity” are two separate goals.  
+
+requirement: the functions that the artefact should offer to achieve the goal. For example, two requirements for a watch could be that it should be usable as a stopwatch and as an alarm clock. Important: IF the research paper is focused on a study like a survey, empirical study or a literature review and does not provide an artifactClass, the requirement instance is the aim of the survey, empirical study or a literature review, for example, what is wanted to be identified in the study. 
+
+artifactClass: The class or category of solution proposed to address the problem, described in general terms rather than specific instances or names. Avoid naming a specific tool such as Oracle and words like system or tool. Important for artifactClass entities:  
+If the research paper is focused on a study like a survey, empirical study or a literature review and does not provide an artefact, do not provide any entity type of this instance. An empirical study cannot be included as artifactClass.  
+For the given research paper, do not include artifactClass not created by the authors, but if they create an artefact it must appear. According to the criteria typically used in Design Science Research, an artifact would be a novel creation or class of solutions developed specifically to address a defined problem. 
+Avoid proper nouns, focusing on broad functional descriptions. For the entity, focus on describing how the artefact achieves its function rather than what it aims to achieve. Look for descriptors that specify how the artefact performs or enhances its function 
+‘artifactClass’ entity name conveys core functional principles rather than specific tool or implementation. Focus on the fundamental concepts and behavioral mechanisms embedded in the artifact—how it performs or enhances its function—rather than what specific type of tool it is (e.g., “user sentiment analysis framework” instead of “user feedback collection app”). Examples: Rather than describing a “data visualization tool,” describe it as a data interpretation model that clarifies relationships and patterns within complex datasets. 
+
+ 
+
+ 
+
+ENSURE THIS IMPORTANT GUIDELINES FOR ENTITIES:  
+
+[how1] A document might have zero or various entities of a type. 
+[how2] For entities that represent verbs, check if there’s an inclusion relationship where performing one activity includes performing another (e.g., “research” includes “read”). If this is the case, focus only on the included action (“read”) and ignore the broader one (“research”). 
+[how3] For those entities of the same type that denote subjects, note if there is a hyponym relationship (e.g., "sparrow" as a specific type of "bird"). If so, consider only the most specific. Hypernyms are a broader category found in the text for the name of the entity. 
+[how4] When an entity is denoted as a conjunction or a disjunction, carefully examine whether it represents a composite idea or two distinct notions. If it is the latter, consider splitting the entity. 
+[how5] Ensure the ‘problem’ instance name does not include part of ‘context’ 
+[what1] When identifying “artifactClass” entities, the entity_name should stand for an abstract category and not specific instances, even when the instance exhibits generalizable features. So, do not be confused by artefact instances being sometimes considered as prototypes embodying principles that could generalise to other artefacts, yet, they still are instances rather than classes. If something is a proof-of-concept, this thing is an instance, and what is to be extracted is the concept this thing aims to prove. 
+[what2] ‘artifactClass’ entity name conveys core functional principles, focusing on the methodology or approach if it represents a widely applicable enhancement technique. Focus on the fundamental concepts and behavioral mechanisms embedded in the artifact—how it performs or enhances its function—rather than what specific type of tool it is (e.g., “user sentiment analysis framework” instead of “user feedback collection app”). Examples: Rather than describing a “data visualization tool,” describe it as a data interpretation model that clarifies relationships and patterns within complex datasets. 
+[what3] When identifying "problem" entities,  focus on objectives or goals that are unmet. Describe the entity_name for problems in terms of a deficiency or shortfall in meeting stakeholders’ goals, using negative phrasing like "lack of...," "inadequate..., “excessive” " or "insufficient...". 
+[what4] When identifying "goal" entities, the entity_name should reflect the stakeholder - intention, and not the artefact utility. For instance, in the sentence “To improve customer satisfaction by reducing response times for support queries.”, “improve customer satisfaction” is the goal while “reducing response times” is the requirement. Look for phrases that express a stakeholder’s intent or desire for a broad outcome (e.g., "improve comprehension," "increase understanding," "enhance decision-making"). 
+[what5] When identifying ‘context’ entities, the entity_name should reflect the specific context of the research paper. For example, rather than using a broad term like “web technologies” for a paper focused on “React-based single-page applications”, use “React single-page applications” to capture the specific context. You can capture later the ‘web technologies’ as entity_hypernym. 
+
+relationship_types and definitions. Please note that all relationships are strictly directional from the domain to the range: 
+
+arisesAt (problem → context): A specific context reveals or gives rise to a problem, situating it within environmental or situational factors. Source: problem; Target: context 
+
+concerns (problem → stakeholder): Indicates that a problem is relevant or impactful for a stakeholder who has a vested interest in addressing or resolving it. Source: problem; Target: stakeholder 
+
+causedBy (problem → problem): Describes a causal relationship between two problems, where one (P1) results from another (P2). Source: problem; Target: problem. Please is important to find this relationships 
+
+informs (problem → goal): Indicates that addressing a problem provides a basis for defining stakeholder goals. Domain: problem; Target: goal 
+
+achievedBy (goal → requirement): Specifies the goal is achieved by the requirement. Source: goal, Target: requirement 
+
+addressedBy (problem → artifactClass): Shows that an artifactClass has been developed specifically to solve or mitigate the identified Problem. Source: problem, Target: artifactClass 
+
+meetBy (requirement → artifactClass): Specifies the requirements met by the artifactClass. Source: requirement, Target: artifactClass 
+
+STEPS: 
+
+1. Identify all entities. Identify all entities in the text according to the predefined entity types. For each identified entity, extract the following information: 
+
+- entity_name: Name of the entity 
+- entity_type: One of the following types: [\{entity_types}] 
+- entity_description: Comprehensive description of the entity's attributes and activities. If it is an artifactClass entity the description should stand for an abstract category 
+- entity_hypernym: Provide an eventual hypernym or broader category found in the text for the name of the entity. It is important to find at least one. 
+- entity_excerpt: Text excerpt from the RESEARCH_PAPER where the entity is introduced 
+
+ 2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other. For each pair of related entities, extract the following information: 
+
+- source_entity: name of the source entity, as identified in step 1 
+- target_entity: name of the target entity, as identified in step 1 
+- relationship_type: One of the following types: [\{relationship_types}] 
+- relationship_description: explanation as to why you think the source entity and the target entity are related to each other 
+- relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity from 1 to 10. Do not use decimal numbers 
+- relationship_excerpt: Text excerpt from the RESEARCH_PAPER where the relationship is introduced 
+
+3. Based on the information identified, fill in the template (see next) according to the following guidelines: 
+
+-If an entity type has no instances, then return  "UNKNOWN" for this entity type 
+-if the entity type is  ‘problem’, and there is only one instance of problem, then provide this instance.  
+-if the entity type is  ‘problem’, and there are several instances of problem, then, select the instance that better describes the problem that the paper targets. Ignore the rest of the instances. 
+-if the entity type is other than ‘problem’, then return all the instances separated by commas. 
+
+This is the template:  
+How to design an \{artifactClass} that satisfies \{requirement} in order for \{stakeholder} to mitigate \{problem}> in \{context} to achieve \{goal}? 
+
+FINAL OUTPUT: 
+Generate a consolidated JSON structure containing all identified entities, relationships, and a generalized research question. Avoid referencing specific tools or proprietary terms; focus on universal principles and methodologies relevant for the research study. The structure should follow the format below: 
+\{ 
+  "entities":  [ 
+    \{ 
+      "entity_type": entity_type, 
+      "entity_name": entity_name, 
+      "entity_description": entity_description, 
+      “entity_hypernym”: entity_hypernym, 
+      “entity_excerpt”: entity_excerpt 
+      ] 
+    }, 
+    // repeat structure for each unique entity 
+ ], 
+
+ "relationships": [ 
+   \{ 
+      "source_entity": source_entity, 
+      "target_entity": target_entity, 
+      "relationship_type": relationship_type, 
+      “relationship_description”: relationship_description, 
+      “relationship_strength”: relationship_strength, 
+      “relationship_excerpt”: relationship_excerpt 
+      ] 
+    }, 
+    // repeat structure for each unique relationship 
+  ], 
+“researchQuestion” : [Research question of the paper in the following format based on identified entities, marking any missing components as "UNKNOWN": How to design an \{artifactClass} that satisfies \{requirement} in order for \{stakeholder} to mitigate \{problem}> in \{context} according to \{goal}? 
+} 
+
+Please return only the json 
+
+ 
+
+ 
