@@ -44,9 +44,8 @@ relationship_types and definitions. Please note that all relationships are stric
 arisesAt (problem → context): A specific context reveals or gives rise to a problem, situating it within environmental or situational factors. Source: problem; Target: context 
 concerns (problem → stakeholder): Indicates that a problem is relevant or impactful for a stakeholder who has a vested interest in addressing or resolving it. Source: problem; Target: stakeholder 
 causedBy (problem → problem): Describes a causal relationship between two problems, where one (P1) results from another (P2). Source: problem; Target: problem. Please is important to find this relationships 
-informs (problem → goal): Indicates that addressing a problem provides a basis for defining stakeholder goals. Domain: problem; Target: goal 
+prevent (problem → goal): Indicates that addressing a problem provides a basis for defining stakeholder goals. Domain: problem; Target: goal 
 achievedBy (goal → requirement): Specifies the goal is achieved by the requirement. Source: goal, Target: requirement 
-addressedBy (problem → artifactClass): Shows that an artifactClass has been developed specifically to solve or mitigate the identified Problem. Source: problem, Target: artifactClass 
 meetBy (requirement → artifactClass): Specifies the requirements met by the artifactClass. Source: requirement, Target: artifactClass 
 
 STEPS: 
